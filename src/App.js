@@ -13,6 +13,7 @@ const WeatherApp = () => {
       return;
     }
 
+    // Set loading state before API call
     setLoading(true);
     setError("");
     setWeatherData(null);
@@ -21,14 +22,17 @@ const WeatherApp = () => {
       const response = await fetch(
         `https://api.weatherapi.com/v1/current.json?key=dcdaf50617e646bca4d161904242812&q=${city}`
       );
+
       if (!response.ok) {
         throw new Error("Invalid city name");
       }
+
       const data = await response.json();
       setWeatherData(data);
     } catch (err) {
       alert("Failed to fetch weather data");
     } finally {
+      // Ensure that loading state is set to false after the fetch
       setLoading(false);
     }
   };
@@ -45,7 +49,11 @@ const WeatherApp = () => {
         />
         <button onClick={fetchWeather}>Search</button>
       </div>
+
+      {/* Show loading message while data is being fetched */}
       {loading && <p>Loading data…</p>}
+
+      {/* Show weather data after successful fetch */}
       {weatherData && (
         <div className="weather-cards">
           <div className="weather-card">
@@ -62,6 +70,8 @@ const WeatherApp = () => {
           </div>
         </div>
       )}
+
+      {/* Show error message if an invalid city name is provided */}
       {error && <p className="error">{error}</p>}
     </div>
   );
