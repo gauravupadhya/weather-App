@@ -17,7 +17,7 @@ const SearchBar = ({ onSearch }) => {
         onChange={(e) => setCity(e.target.value)}
         placeholder="Enter city name"
       />
-      <button onClick={handleSeargit ch}>Search</button>
+      <button onClick={handleSearch}>Search</button>
     </div>
   );
 };
